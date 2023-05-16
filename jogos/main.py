@@ -1,16 +1,29 @@
-# This is a sample Python script.
+print("*********************************")
+print("Bem vindo ao jogo de Adivinhação!")
+print("*********************************")
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+numero_secreto = 43
+total_de_tentativas = 5
+rodada = 1
 
+while rodada <= total_de_tentativas:
+    print("Tentativa {} de {}".format(rodada, total_de_tentativas))
+    chute_str = input("Digite o seu número: ")
+    print("Você chutou ", chute_str)
+    chute = int(chute_str)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    acertou = chute == numero_secreto
+    maior = chute > numero_secreto
+    menor = chute < numero_secreto
 
+    if acertou:
+        print("Você acertou")
+    else:
+        if maior:
+            print("Você errou, seu chute foi maior que o número secreto.")
+        elif menor:
+            print("Você errou, seu chute foi menor que o número secreto.")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    rodada = rodada + 1
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print("Fim do jogo")
