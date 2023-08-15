@@ -1,13 +1,43 @@
 import websocket
+import time
+
+from pynput.keyboard import Key, Listener 
 
 try:
     import thread
 except ImportError:
     import _thread as thread
 
+
 import time
 
+def show(key): 
+  
+    print('\nYou Entered {0}'.format( key)) 
+    global tecla
+    valor = str(key).upper().replace("'", "")
+
+    if valor == "W":
+        tecla = "F"
+    elif valor == "A":
+        tecla = "E"
+    elif valor == "D":
+        tecla = "D"
+    elif valor == "S":
+        tecla = "R"
+    elif valor == "P":
+        tecla = "P"
+
+    print(tecla)
+
+    ws.send(tecla)
+
+    if key == Key.delete: 
+      return False
+
 def on_message(ws, message):
+    # print("SENDING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + tecla)
+    # ws.send(tecla)
     print(message)
 
 def on_error(ws, error):
@@ -24,11 +54,11 @@ def on_open(ws):
         # time.sleep(1)
         # ws.close()wd
 
-        ws.send("E")
+        with Listener(on_press = show) as listener:    
+            listener.join() 
 
         print("thread terminating...")
     thread.start_new_thread(run, ())
-
 
 if __name__ == "__main__":
     websocket.enableTrace(True)
@@ -39,3 +69,4 @@ if __name__ == "__main__":
     ws.on_open = on_open
 
     ws.run_forever()
+
