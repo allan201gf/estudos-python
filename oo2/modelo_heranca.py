@@ -49,6 +49,39 @@ vingadores.dar_likes()
 atlanta = Serie("Atlanta", 2017, 2)
 # print(atlanta.nome)
 
-filmes_e_series = [vingadores, atlanta]
-for programa in filmes_e_series:
+onzeHomens = Filme("Onze Homens e Um Segredo", 2010, 200)
+onzeHomens.dar_likes()
+onzeHomens.dar_likes()
+onzeHomens.dar_likes()
+
+
+demolidor = Serie("Demolidor", 2000, 100)
+demolidor.dar_likes()
+
+class Playlist:
+    def __init__(self, nome, programas):
+        self.nome = nome;
+        self._programas = programas
+
+    @property
+    def listagem(self):
+            return self._programas
+        
+    @property
+    def tamanho(self):
+            return len(self._programas)
+
+    def __getitem__(self, item):
+        return self._programas[item]
+
+
+filmes_e_series = [vingadores, atlanta, onzeHomens, demolidor]
+
+playlist_fim_de_semana = Playlist('fim de semana', filmes_e_series)
+
+print(f'Tamanho do playlist: {len(playlist_fim_de_semana.listagem)}')
+
+for programa in playlist_fim_de_semana:
     print(programa)
+
+print(f'Ta ou nao ta? {demolidor in playlist_fim_de_semana}')
